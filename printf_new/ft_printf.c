@@ -124,8 +124,8 @@ int	main(void)
 
 	int	count;
 
-	count = ft_printf("%d", 214748364888);
+	count = ft_printf("%d", -2147483647);
 	printf("count ft_printf %d\n", count);
-	count = printf("%d", 214748364888);
+	count = printf("%d", -2147483647);
 	printf("count printf %d\n", count);
 }

@@ -28,4 +28,5 @@ size_t	ft_strlen(const char *s)
 int	main(void)
 {
 	printf("%zu", ft_strlen("Hullo there!"));
+	return (0);
 }*/
