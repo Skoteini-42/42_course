@@ -99,22 +99,19 @@ char	*get_next_line(int fd)
 	
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FD_SIZE)
 		return (NULL);
+	stash[fd] = get_read(fd, stash[fd]);
 	if (!stash[fd] || stash[fd][0] == '\0')
-	{
-		stash[fd] = get_read(fd, stash[fd]);
-		if (!stash[fd] || stash[fd][0] == '\0')
-		{	
-			if (stash[fd])
-				return(free (stash[fd]), stash[fd] = NULL);
-			return (NULL);
-		}
+	{	
+		if (stash[fd])
+			return(free (stash[fd]), stash[fd] = NULL);
+		return (NULL);
 	}
 	if (!stash[fd] || non_printable(stash[fd]))
 		return(free (stash[fd]), stash[fd] = NULL, NULL);
 	line = extract_line(stash[fd]);
 	stash[fd] = clear_stash(stash[fd]);
-	if (!stash[fd])
-		return (free (line), NULL);
+	if (!line)
+		return (free (stash[fd]), NULL);
 	return (line);
 }
 /*
