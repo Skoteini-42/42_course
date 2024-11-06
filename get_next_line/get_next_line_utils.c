@@ -33,7 +33,7 @@ char	*join_buf(char const *stash, char const *buffer)
 	joined = (char *)malloc(sizeof(char) * (ft_strlen(stash)
 				+ ft_strlen(buffer) + 1));
 	if (!joined)
-		return (free (char *)stash, NULL);
+		return (free ((char *)stash), NULL);
 	i = 0;
 	while (stash[i])
 	{
