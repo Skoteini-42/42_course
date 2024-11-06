@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*extract_line(char *stash)
 {
@@ -100,22 +99,19 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	stash = get_read(fd, stash);
 	if (!stash || stash[0] == '\0')
 	{
-		stash = get_read(fd, stash);
-		if (!stash || stash[0] == '\0')
-		{
-			if (stash)
-				return (free (stash), stash = NULL);
-			return (NULL);
-		}
+		if (stash)
+			return (free (stash), stash = NULL);
+		return (NULL);
 	}
 	if (!stash || non_printable(stash))
 		return (free (stash), stash = NULL, NULL);
 	line = extract_line(stash);
 	stash = clear_stash(stash);
-	if (!stash)
-		return (free (line), NULL);
+	if (!line)
+		return (free (stash), NULL);
 	return (line);
 }
 /*
