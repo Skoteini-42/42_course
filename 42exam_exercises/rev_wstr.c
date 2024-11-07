@@ -1,6 +1,5 @@
 
 #include <unistd.h>
-#include <stdlib.h>
 
 int	is_space(char c)
 {
@@ -14,7 +13,9 @@ int	main(int argc, char **argv)
 	int	i;
 	int	start;
 	int	end;
-
+	int	first_word_printed;
+	
+	first_word_printed = 0;
 	if (argc == 2)
 	{
 		i = 0;
@@ -22,21 +23,20 @@ int	main(int argc, char **argv)
 			i++;
 		i--;
 		while (i >= 0)
-		{
+		{			
 			while (i >= 0 && is_space(argv[1][i]))
 				i--;
-			end = i + 1;
+			if (i < 0) 
+				break;
+			end = i;
 			while (i >= 0 && !is_space(argv[1][i]))
 				i--;
 			start = i + 1;
-			while (start < end)
-			{
-				write (1, &argv[1][start], 1);
-				start++;
-			}
-			if (i >= 0)
+			if (first_word_printed)
 				write (1, " ", 1);
+			write (1, &argv[1][start], end -start + 1);
+			first_word_printed = 1;				
 		}
 	}
-	write (1, "\n",1 );
+	write (1, "\n", 1);
 }
