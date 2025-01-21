@@ -53,6 +53,10 @@ SRCS = ft_isalpha.c\
 	   ft_lstsize.c\
 	   ft_lstlast.c\
 	   ft_lstadd_back.c\
+	   ft_printf.c\
+	   ft_printf_utils.c\
+	   get_next_line.c\
+	   get_next_line_utils.c\
 
 OBJS = ${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS.c=.o}
