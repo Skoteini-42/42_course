@@ -9,6 +9,12 @@
 # include <limits.h>
 # include <sys/time.h>
 
+# define PHILO_ERR "Need ≥1 philosopher"
+# define TIME_DIE_ERR "time_to_die must be ≥1ms"
+# define TIME_EAT_ERR "time_to_eat must be ≥1ms"
+# define TIME_SLEEP_ERR "time_to_sleep must be ≥1ms"
+# define EAT_COUNT_ERR "must_eat_count must be ≥1"
+
 typedef struct s_philo
 {
 	int				id;
@@ -33,6 +39,8 @@ typedef struct s_table
 	pthread_mutex_t	termination_mutex;
 }	t_table;
 
-int	main(int argc, char **argv);
+/******** Argument Utilities ********/
+
 int	ft_atoi(const char *nptr);
 int	is_valid_number(char *str);
+
