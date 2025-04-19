@@ -16,23 +16,32 @@ int	start_simulation(t_table *table)
 	if (pthread_create(&monitor, NULL, monitor_routine, table) != 0)
 		return (1);
 	pthread_join(monitor, NULL);
+	i = -1;
+	while (++i < table->philo_count)
+		pthread_join(table->philos[i].thread_id, NULL);
 	return (0);
 }
 
 void	*philosopher_routine(void *arg)
 {
-	t_philo	*philo;
+	t_philo	*philos;
 
-	philo = (t_philo *)arg;
-	while (get_current_time() < philo->table->start_time)
+	philos = (t_philo *)arg;
+	while (get_current_time() < philos->table->start_time)
 		usleep(100);
 	while (1)
 	{
-		// Temporary: Just print and sleep
-		pthread_mutex_lock(&philo->table->print_mutex);
+		pthread_mutex_lock(&philos->table->termination_mutex);
+		if (philos->table->termination_flag)
+		{
+			pthread_mutex_unlock(&philos->table->termination_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&philos->table->termination_mutex);
+		pthread_mutex_lock(&philos->table->print_mutex);
 		printf("%ld %d is thinking\n",
-			get_current_time() - philo->table->start_time, philo->id);
-		pthread_mutex_unlock(&philo->table->print_mutex);
+			get_current_time() - philos->table->start_time, philos->id);
+		pthread_mutex_unlock(&philos->table->print_mutex);
 		usleep(1000);
 	}
 	return (NULL);
@@ -49,4 +58,14 @@ void	*monitor_routine(void *arg)
 	table->termination_flag = 1;
 	pthread_mutex_unlock(&table->termination_mutex);
 	return (NULL);
+}
+
+int	simulation_ended(t_table *table)
+{
+	int	ended;
+
+	pthread_mutex_lock(&table->termination_mutex);
+	ended = table->termination_flag;
+	pthread_mutex_unlock(&table->termination_mutex);
+	return (ended);
 }

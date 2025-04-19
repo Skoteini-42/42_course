@@ -23,16 +23,16 @@ static int	parse_args(t_table *table, int argc, char **argv)
 	}
 	if (parse_positive_int(argv[1], &table->philo_count, PHILO_ERR))
 		return (1);
-	if (parse_positive_int(argv[2], &t->time_to_die, TIME_DIE_ERR))
+	if (parse_positive_int(argv[2], &table->time_to_die, TIME_DIE_ERR))
 		return (1);
-	if (parse_positive_int(argv[3], &t->time_to_eat, TIME_EAT_ERR))
+	if (parse_positive_int(argv[3], &table->time_to_eat, TIME_EAT_ERR))
 		return (1);
-	if (parse_positive_int(argv[4], &t->time_to_sleep, TIME_SLEEP_ERR))
+	if (parse_positive_int(argv[4], &table->time_to_sleep, TIME_SLEEP_ERR))
 		return (1);
 	table->must_eat_count = -1;
 	if (argc == 6)
 	{
-		if (parse_positive_int(argv[5], &t->must_eat_count, EAT_COUNT_ERR))
+		if (parse_positive_int(argv[5], &table->must_eat_count, EAT_COUNT_ERR))
 			return (1);
 	}
 	return (0);

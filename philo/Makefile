@@ -1,66 +1,32 @@
-NAME = ./philo
+NAME = philo
 
-# ************************************
-# Sources                            *
-# ************************************
-
-C_DIR = src 
-
+C_DIR = src
 C_FILES = main.c \
-		arg_utils.c \
-		cleanup.c \
-		init.c \
-		simulation.c \
+arg_utils.c \
+cleanup.c \
+init.c \
+simulation.c \
+sim_utils.c \
+forks.c
 
-SRCS = $(addprefix $(C_DIR)/,$(C_FILES))
-
-# ************************************
-# Objects                            *
-# ************************************
-
-O_DIR = src/_obj
-
+O_DIR = obj
 OBJS = $(addprefix $(O_DIR)/,$(C_FILES:.c=.o))
 
-# ************************************
-# Headers                            *
-# ************************************
-
 H_DIR = inc
-
 H_FILES = philo.h
-
 HEADERS = $(addprefix $(H_DIR)/,$(H_FILES))
 
-# ************************************
-# Flags                              *
-# ************************************
-
 CFLAGS = -Wall -Wextra -Werror -pthread
-
-# ************************************
-# Libraries                          *
-# ************************************
-
-
-# ************************************
-# Includes                           *
-# ************************************
-
 INCLUDES = -I$(H_DIR)
-
-# ************************************
-# Rules                              *
-# ************************************
 
 all: $(NAME)
 
 $(O_DIR)/%.o: $(C_DIR)/%.c Makefile $(HEADERS)
 	@mkdir -p $(@D)
-	cc -c -o $@ $< $(INCLUDES) $(CFLAGS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
-	cc -pthread-o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(O_DIR)
@@ -69,9 +35,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-# ************************************
-# Phony                              *
-# ************************************
 
 .PHONY: all clean fclean re

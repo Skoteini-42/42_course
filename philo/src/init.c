@@ -5,7 +5,7 @@ static int	init_forks(t_table *table, int *forks_initialized)
 	int	i;
 
 	i = -1;
-	while (++i < t->philo_count)
+	while (++i < table->philo_count)
 	{
 		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
 			return (1);
@@ -51,12 +51,11 @@ static int	initialize_philos(t_table *table)
 
 int	initialize_simulation(t_table *table)
 {
-	int	i;
 	int	forks_initialized; 
 
 	forks_initialized = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->philo_count);
-	if (!table->forks || init_forks(table, &forks_initiliazed)) != 0
+	if (!table->forks || init_forks(table, &forks_initialized) != 0)
 		return (cleanup(table, forks_initialized, 0, 1));
 	if (init_shared_mutexes(table, forks_initialized) != 0)
 		return (cleanup(table, forks_initialized, 0, 1));

@@ -46,7 +46,7 @@ int	is_valid_number(char *str)
 		if (!ft_isdigit(str[i]))
 			return (0);
 		n = n * 10 + (str[i] - '0');
-		if (num > INT_MAX)
+		if (n > INT_MAX)
 			return (0);
 		i++;
 	}
