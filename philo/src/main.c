@@ -21,7 +21,7 @@ static int	parse_args(t_table *table, int argc, char **argv)
 		if (!is_valid_number(argv[i]))
 			return (printf("Error: Invalid argument '%s'\n", argv[i]), 1);
 	}
-	if (parse_positive_int(argv[1], &tABLE->philo_count, PHILO_ERR))
+	if (parse_positive_int(argv[1], &table->philo_count, PHILO_ERR))
 		return (1);
 	if (parse_positive_int(argv[2], &t->time_to_die, TIME_DIE_ERR))
 		return (1);
@@ -46,8 +46,10 @@ int	main(int argc, char **argv)
 		return (printf("Error : Invalid number of arguments\n"), 1);
 	memset(&table, 0, sizeof(t_table));
 	if (parse_args(&table, argc, argv) != 0)
-		return (1);
+		return (1); 
 	if (initialize_simulation(&table) != 0)
-		return (cleanup(&table, "Initialization failed", 1));
-	return (cleanup(&table, NULL, 0));
+		return (cleanup(&table, table.philo_count, table.philo_count, 1));
+	if (start_simulation(&table) != 0)
+		return (cleanup(&table, table.philo_count, table.philo_count, 1));
+	return (cleanup(&table, table.philo_count, table.philo_count, 0));
 }

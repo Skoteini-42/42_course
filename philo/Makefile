@@ -8,6 +8,9 @@ C_DIR = src
 
 C_FILES = main.c \
 		arg_utils.c \
+		cleanup.c \
+		init.c \
+		simulation.c \
 
 SRCS = $(addprefix $(C_DIR)/,$(C_FILES))
 
@@ -33,7 +36,7 @@ HEADERS = $(addprefix $(H_DIR)/,$(H_FILES))
 # Flags                              *
 # ************************************
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 # ************************************
 # Libraries                          *
@@ -57,7 +60,7 @@ $(O_DIR)/%.o: $(C_DIR)/%.c Makefile $(HEADERS)
 	cc -c -o $@ $< $(INCLUDES) $(CFLAGS)
 
 $(NAME): $(OBJS)
-	cc -o $@ $^ $(LIBS)
+	cc -pthread-o $@ $^ $(LIBS)
 
 clean:
 	rm -rf $(O_DIR)

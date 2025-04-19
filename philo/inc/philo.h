@@ -15,7 +15,7 @@
 # define TIME_SLEEP_ERR "time_to_sleep must be ≥1ms"
 # define EAT_COUNT_ERR "must_eat_count must be ≥1"
 
-typedef struct s_philo
+typedef struct s_philos
 {
 	int				id;
 	int				eat_count;
@@ -23,10 +23,11 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	struct s_table 	*table;
-}	t_philo;
+}	t_philos;
 
 typedef struct s_table
 {
+	t_philo			*philos;
 	long			start_time;
 	int				termination_flag;
 	int				philo_count;
@@ -40,7 +41,20 @@ typedef struct s_table
 }	t_table;
 
 /******** Argument Utilities ********/
+int		ft_atoi(const char *nptr);
+int		is_valid_number(char *str);
 
-int	ft_atoi(const char *nptr);
-int	is_valid_number(char *str);
+/******** Simulation ********/
+int		initialize_simulation(t_table *table);
+int		start_simulation(t_table *table);
+void	*philosopher_routine(void *arg);
+void	*monitor_routine(void *arg);
 
+/******** Simulation Utils ********/
+long	get_current_time(void);
+
+/******** Cleanup ********/
+void	cleanup_philos(t_table *table, int philos_init);
+void	cleanup_forks(t_table *table, int forks_init);
+void	cleanup_shared_mutexes(t_table *table);
+int		cleanup(t_table *table, int forks_init, int philos_init, int exit_code);
