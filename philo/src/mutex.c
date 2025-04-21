@@ -18,7 +18,7 @@ static void	take_forks_odd(t_philo *philos)
 
 void	take_forks(t_philo *philos)
 {
-	if (philo->id % 2 == 0)
+	if (philos->id % 2 == 0)
 		take_forks_even(philos);
 	else
 		take_forks_odd(philos);

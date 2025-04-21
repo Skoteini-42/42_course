@@ -22,27 +22,30 @@ int	start_simulation(t_table *table)
 	return (0);
 }
 
+static void	*handle_single_philosopher(t_philo *philos)
+{
+	pthread_mutex_lock(philos->left_fork);
+	print_status(philos, "has taken a fork");
+	usleep(philos->table->time_to_die * 1000);
+	print_status(philos, "died");
+	return (NULL);
+}
+
 void	*philosopher_routine(void *arg)
 {
 	t_philo	*philos;
 
 	philos = (t_philo *)arg;
-	while (get_current_time() < philos->table->start_time)
-		usleep(100);
-	while (1)
+	wait_for_simulation_start(philos->table);
+	if (philos->table->philo_count == 1)
+		return (handle_single_philosopher(philos));
+	while (!simulation_ended(philos->table))
 	{
-		pthread_mutex_lock(&philos->table->termination_mutex);
-		if (philos->table->termination_flag)
-		{
-			pthread_mutex_unlock(&philos->table->termination_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&philos->table->termination_mutex);
-		pthread_mutex_lock(&philos->table->print_mutex);
-		printf("%ld %d is thinking\n",
-			get_current_time() - philos->table->start_time, philos->id);
-		pthread_mutex_unlock(&philos->table->print_mutex);
-		usleep(1000);
+		think(philos);
+		take_forks(philos);
+		eat(philos);
+		release_forks(philos);
+		sleep_and_think(philos);
 	}
 	return (NULL);
 }
@@ -50,13 +53,21 @@ void	*philosopher_routine(void *arg)
 void	*monitor_routine(void *arg)
 {
 	t_table	*table;
+	int		i;
 
 	table = (t_table *)arg;
-	// Temporary: Just wait 2 seconds and terminate
-	usleep(2000000); // 2 seconds
-	pthread_mutex_lock(&table->termination_mutex);
-	table->termination_flag = 1;
-	pthread_mutex_unlock(&table->termination_mutex);
+	while (!simulation_ended(table))
+	{
+		i = -1;
+		while (++i < table->philo_count)
+		{
+			if (check_philo_death(&table->philos[i]))
+				return (set_termination_flag(table), NULL);
+		}
+		if (check_all_philos_full(table))
+			return (set_termination_flag(table), NULL);
+		usleep(1000);
+	}
 	return (NULL);
 }
 

@@ -55,12 +55,25 @@ int		simulation_ended(t_table *table);
 
 /******** Simulation Utils ********/
 long	get_current_time(void);
+void	wait_for_simulation_start(t_table *table);
 void	print_status(t_philo *philos, char *msg);
 void	print_death(t_philo *philos);
+void	update_last_meal(t_philo *philos);
 
-/******** Fork management ********/
+/******** Philosopher's actions ********/
+void	think(t_philo *philos);
+void	eat(t_philo *philos);
+void	sleep_and_think(t_philo *philos);
+
+/******** Monitor Utils ********/
+int		check_philo_death(t_philo *philos);
+int		check_all_philos_full(t_table *table);
+
+/******** Mutex management ********/
 void	take_forks(t_philo *philos);
 void	release_forks(t_philo *philos);
+void	unlock_last_meal(t_philo *philos);
+void	set_termination_flag(t_table *table);
 
 /******** Cleanup ********/
 void	cleanup_philos(t_table *table, int philos_init);

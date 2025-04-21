@@ -7,7 +7,10 @@ cleanup.c \
 init.c \
 simulation.c \
 sim_utils.c \
-forks.c
+mutex.c \
+mutex_utils.c \
+philosopher_actions.c \
+monitor_utils.c
 
 O_DIR = obj
 OBJS = $(addprefix $(O_DIR)/,$(C_FILES:.c=.o))
