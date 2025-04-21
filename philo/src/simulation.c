@@ -5,7 +5,6 @@ int	start_simulation(t_table *table)
 	int				i;
 	pthread_t	monitor;
 
-	table->start_time = get_current_time() + 100;
 	i = -1;
 	while (++i < table->philo_count)
 	{
@@ -24,10 +23,15 @@ int	start_simulation(t_table *table)
 
 static void	*handle_single_philosopher(t_philo *philos)
 {
+	wait_for_simulation_start(philos->table);
 	pthread_mutex_lock(philos->left_fork);
 	print_status(philos, "has taken a fork");
-	usleep(philos->table->time_to_die * 1000);
-	print_status(philos, "died");
+	pthread_mutex_lock(&philos->meal_mutex);
+    philos->last_meal_time = get_current_time();
+    pthread_mutex_unlock(&philos->meal_mutex);
+	while (!simulation_ended(philos->table))
+		usleep(100);
+	pthread_mutex_unlock(philos->left_fork);
 	return (NULL);
 }
 
@@ -39,13 +43,16 @@ void	*philosopher_routine(void *arg)
 	wait_for_simulation_start(philos->table);
 	if (philos->table->philo_count == 1)
 		return (handle_single_philosopher(philos));
+	pthread_mutex_lock(&philos->meal_mutex);
+	philos->last_meal_time = get_current_time();
+	pthread_mutex_unlock(&philos->meal_mutex);
 	while (!simulation_ended(philos->table))
 	{
 		think(philos);
 		take_forks(philos);
 		eat(philos);
 		release_forks(philos);
-		sleep_and_think(philos);
+		philo_sleep(philos);
 	}
 	return (NULL);
 }
@@ -61,11 +68,10 @@ void	*monitor_routine(void *arg)
 		i = -1;
 		while (++i < table->philo_count)
 		{
-			if (check_philo_death(&table->philos[i]))
-				return (set_termination_flag(table), NULL);
+			if (check_philo_death(&table->philos[i])
+					|| check_all_philos_full(table))
+				return (NULL);
 		}
-		if (check_all_philos_full(table))
-			return (set_termination_flag(table), NULL);
 		usleep(1000);
 	}
 	return (NULL);

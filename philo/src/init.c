@@ -40,7 +40,7 @@ static int	initialize_philos(t_table *table)
 		table->philos[i].left_fork = &table->forks[i];
 		table->philos[i].right_fork = &table->forks[(i + 1) % table->philo_count];
 		table->philos[i].table = table;
-		table->philos[i].last_meal_time = 0;
+		table->philos[i].last_meal_time = table->start_time;
 		table->philos[i].eat_count = 0;
 		if (pthread_mutex_init(&table->philos[i].meal_mutex, NULL) != 0)
 			return (cleanup_philos(table, philos_initialized), 1);
@@ -59,6 +59,7 @@ int	initialize_simulation(t_table *table)
 		return (cleanup(table, forks_initialized, 0, 1));
 	if (init_shared_mutexes(table, forks_initialized) != 0)
 		return (cleanup(table, forks_initialized, 0, 1));
+	table->start_time = get_current_time() + 100;
 	table->philos = malloc(sizeof(t_philo) * table->philo_count);
 	if (!table->philos || initialize_philos(table) != 0)
 		return (cleanup_shared_mutexes(table),

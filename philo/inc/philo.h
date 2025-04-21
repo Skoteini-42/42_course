@@ -63,7 +63,7 @@ void	update_last_meal(t_philo *philos);
 /******** Philosopher's actions ********/
 void	think(t_philo *philos);
 void	eat(t_philo *philos);
-void	sleep_and_think(t_philo *philos);
+void	philo_sleep(t_philo *philos);
 
 /******** Monitor Utils ********/
 int		check_philo_death(t_philo *philos);

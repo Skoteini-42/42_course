@@ -15,7 +15,7 @@ void	eat(t_philo *philos)
 	usleep(philos->table->time_to_eat * 1000);
 }
 
-void	sleep_and_think(t_philo *philos)
+void	philo_sleep(t_philo *philos)
 {
 	print_status(philos, "is sleeping");
 	usleep(philos->table->time_to_sleep * 1000);

@@ -8,10 +8,16 @@ int	check_philo_death(t_philo *philos)
 	died = 0;
 	pthread_mutex_lock(&philos->meal_mutex);
 	time_since_meal = get_current_time() - philos->last_meal_time;
-	if (time_since_meal > philos->table->time_to_die)
+	if (time_since_meal >= philos->table->time_to_die)
 	{
-		print_status(philos, "died");
-		died = 1;
+		pthread_mutex_lock(&philos->table->termination_mutex);
+		if (!philos->table->termination_flag)
+		{
+			print_death(philos);
+			philos->table->termination_flag = 1;
+			died = 1;
+		}
+		pthread_mutex_unlock(&philos->table->termination_mutex);
 	}
 	pthread_mutex_unlock(&philos->meal_mutex);
 	return (died);
