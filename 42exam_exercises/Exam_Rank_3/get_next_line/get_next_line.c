@@ -37,7 +37,7 @@ char	*get_next_line(int fd)
 			if (buffer_read <= 0)
 				break ;
 		}
-		if (buffer[buffer_post] == '\n');
+		if (buffer[buffer_pos] == '\n')
 		{
 			line[i++] = buffer[buffer_pos++];
 			break ;
