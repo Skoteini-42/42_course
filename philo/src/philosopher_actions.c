@@ -3,6 +3,8 @@
 void	think(t_philo *philos)
 {
 	print_status(philos, "is thinking");
+	if (philos->id % 2 == 1)
+		usleep(1000);
 }
 
 void	eat(t_philo *philos)

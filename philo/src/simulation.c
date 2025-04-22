@@ -68,9 +68,17 @@ void	*monitor_routine(void *arg)
 		i = -1;
 		while (++i < table->philo_count)
 		{
-			if (check_philo_death(&table->philos[i])
-					|| check_all_philos_full(table))
+			if (check_philo_death(&table->philos[i]))
 				return (NULL);
+		}
+		if (table->must_eat_count != -1 && check_all_philos_full(table))
+		{
+			pthread_mutex_lock(&table->print_mutex);
+			printf("%ld All philosophers have eaten %d times\n",
+				get_current_time() - table->start_time, table->must_eat_count);
+			pthread_mutex_unlock(&table->print_mutex);
+			set_termination_flag(table);
+			return (NULL);
 		}
 		usleep(1000);
 	}
