@@ -15,7 +15,7 @@ void	putstr(char *s, int *len)
 	}
 }
 
-void	putnum(long long n, unsigned int base, int *len)
+void	putnum(long long int n, unsigned int base, int *len)
 {
 	if (n < 0)
 	{
@@ -44,8 +44,8 @@ int	ft_printf(char *fmt, ...)
 				putstr(va_arg(ptr, char *), &len);
 			if (fmt[i] == 'd')
 				putnum((long long int)va_arg(ptr, int), 10, &len);
-			if (dmt[i] == 'x')
-				putnum(((long long int)var_arg(ptr, unsigned int), 16, &len);
+			if (fmt[i] == 'x')
+				putnum((long long int)va_arg(ptr, unsigned int), 16, &len);
 		}
 		else
 			len += write(1, &fmt[i], 1);
