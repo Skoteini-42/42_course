@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpapadak <fpapadak@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 12:52:04 by fpapadak          #+#    #+#             */
+/*   Updated: 2025/04/29 13:02:21 by fpapadak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	parse_positive_int(char *arg, int *dest, char *err)
@@ -46,7 +58,7 @@ int	main(int argc, char **argv)
 		return (printf("Error : Invalid number of arguments\n"), 1);
 	memset(&table, 0, sizeof(t_table));
 	if (parse_args(&table, argc, argv) != 0)
-		return (1); 
+		return (1);
 	if (initialize_simulation(&table) != 0)
 		return (cleanup(&table, table.philo_count, table.philo_count, 1));
 	if (start_simulation(&table) != 0)

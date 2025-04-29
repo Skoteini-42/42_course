@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpapadak <fpapadak@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 12:52:21 by fpapadak          #+#    #+#             */
+/*   Updated: 2025/04/29 12:54:06 by fpapadak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	cleanup_philos(t_table *table, int philos_init)
@@ -7,7 +19,7 @@ void	cleanup_philos(t_table *table, int philos_init)
 	if (table->philos)
 	{
 		i = -1;
-		while (++i <  philos_init)
+		while (++i < philos_init)
 			pthread_mutex_destroy(&table->philos[i].meal_mutex);
 		free(table->philos);
 		table->philos = NULL;

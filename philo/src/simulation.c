@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpapadak <fpapadak@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 12:53:01 by fpapadak          #+#    #+#             */
+/*   Updated: 2025/04/29 13:00:51 by fpapadak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	start_simulation(t_table *table)
 {
-	int				i;
+	int			i;
 	pthread_t	monitor;
 
 	i = -1;
 	while (++i < table->philo_count)
 	{
 		if (pthread_create(&table->philos[i].thread_id, NULL,
-			philosopher_routine, &table->philos[i]) != 0)
+				philosopher_routine, &table->philos[i]) != 0)
 			return (1);
 	}
 	if (pthread_create(&monitor, NULL, monitor_routine, table) != 0)
@@ -27,8 +39,8 @@ static void	*handle_single_philosopher(t_philo *philos)
 	pthread_mutex_lock(philos->left_fork);
 	print_status(philos, "has taken a fork");
 	pthread_mutex_lock(&philos->meal_mutex);
-    philos->last_meal_time = get_current_time();
-    pthread_mutex_unlock(&philos->meal_mutex);
+	philos->last_meal_time = get_current_time();
+	pthread_mutex_unlock(&philos->meal_mutex);
 	while (!simulation_ended(philos->table))
 		usleep(100);
 	pthread_mutex_unlock(philos->left_fork);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpapadak <fpapadak@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 12:50:34 by fpapadak          #+#    #+#             */
+/*   Updated: 2025/04/29 15:08:12 by fpapadak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -24,7 +36,7 @@ typedef struct s_philo
 	pthread_mutex_t	meal_mutex;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	struct s_table 	*table;
+	struct s_table	*table;
 }	t_philo;
 
 typedef struct s_table
@@ -58,7 +70,7 @@ long	get_current_time(void);
 void	wait_for_simulation_start(t_table *table);
 void	print_status(t_philo *philos, char *msg);
 void	print_death(t_philo *philos);
-void	update_last_meal(t_philo *philos);
+void	set_termination_flag(t_table *table);
 
 /******** Philosopher's actions ********/
 void	think(t_philo *philos);
@@ -72,8 +84,6 @@ int		check_all_philos_full(t_table *table);
 /******** Mutex management ********/
 void	take_forks(t_philo *philos);
 void	release_forks(t_philo *philos);
-void	unlock_last_meal(t_philo *philos);
-void	set_termination_flag(t_table *table);
 
 /******** Cleanup ********/
 void	cleanup_philos(t_table *table, int philos_init);

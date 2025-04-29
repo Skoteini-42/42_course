@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fpapadak <fpapadak@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/29 12:52:27 by fpapadak          #+#    #+#             */
+/*   Updated: 2025/04/29 12:57:47 by fpapadak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	init_forks(t_table *table, int *forks_initialized)
@@ -38,7 +50,8 @@ static int	initialize_philos(t_table *table)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].left_fork = &table->forks[i];
-		table->philos[i].right_fork = &table->forks[(i + 1) % table->philo_count];
+		table->philos[i].right_fork = &table->forks[(i + 1)
+			% table->philo_count];
 		table->philos[i].table = table;
 		table->philos[i].last_meal_time = table->start_time;
 		table->philos[i].eat_count = 0;
@@ -51,7 +64,7 @@ static int	initialize_philos(t_table *table)
 
 int	initialize_simulation(t_table *table)
 {
-	int	forks_initialized; 
+	int	forks_initialized;
 
 	forks_initialized = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->philo_count);

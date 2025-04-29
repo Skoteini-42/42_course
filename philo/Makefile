@@ -8,7 +8,6 @@ init.c \
 simulation.c \
 sim_utils.c \
 mutex.c \
-mutex_utils.c \
 philosopher_actions.c \
 monitor_utils.c
 
