@@ -53,3 +53,17 @@ int	check_all_philos_full(t_table *table)
 	}
 	return (full_count == table->philo_count);
 }
+
+void	handle_all_full(t_table *table)
+{
+	pthread_mutex_lock(&table->termination_mutex);
+	if (!table->termination_flag)
+	{
+		pthread_mutex_lock(&table->print_mutex);
+		printf("%ld All philosophers have eaten %d times\n",
+			get_current_time() - table->start_time, table->must_eat_count);
+		pthread_mutex_unlock(&table->print_mutex);
+		table->termination_flag = 1;
+	}
+	pthread_mutex_unlock(&table->termination_mutex);
+}

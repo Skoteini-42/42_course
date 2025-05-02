@@ -60,8 +60,9 @@ int	main(int argc, char **argv)
 	if (parse_args(&table, argc, argv) != 0)
 		return (1);
 	if (initialize_simulation(&table) != 0)
-		return (cleanup(&table, table.philo_count, table.philo_count, 1));
+		return (cleanup(&table, table.forks_initialized,
+			table.philos_initialized, 1));
 	if (start_simulation(&table) != 0)
-		return (cleanup(&table, table.philo_count, table.philo_count, 1));
-	return (cleanup(&table, table.philo_count, table.philo_count, 0));
+		return (cleanup(&table, table.forks_initialized, table.philos_initialized, 1));
+	return (cleanup(&table, table.forks_initialized, table.philos_initialized, 0));
 }

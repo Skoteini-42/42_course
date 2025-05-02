@@ -28,14 +28,19 @@ void	wait_for_simulation_start(t_table *table)
 
 void	print_status(t_philo *philos, char *msg)
 {
-	pthread_mutex_lock(&philos->table->print_mutex);
-	if (!simulation_ended(philos->table))
+	int	ended;
+
+	pthread_mutex_lock(&philos->table->termination_mutex);
+	ended = philos->table->termination_flag;
+	pthread_mutex_unlock(&philos->table->termination_mutex);
+	if (!ended)
 	{
+		pthread_mutex_lock(&philos->table->print_mutex);
 		printf("%ld %d %s\n",
 			get_current_time() - philos->table->start_time,
 			philos->id, msg);
+		pthread_mutex_unlock(&philos->table->print_mutex);
 	}
-	pthread_mutex_unlock(&philos->table->print_mutex);
 }
 
 void	print_death(t_philo *philos)

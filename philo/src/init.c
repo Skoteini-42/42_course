@@ -39,13 +39,12 @@ static int	init_shared_mutexes(t_table *table, int forks_initialized)
 	return (0);
 }
 
-static int	initialize_philos(t_table *table)
+static int	initialize_philos(t_table *table, int *philos_initialized)
 {
 	int	i;
-	int	philos_initialized;
 
 	i = -1;
-	philos_initialized = 0;
+	*philos_initialized = 0;
 	while (++i < table->philo_count)
 	{
 		table->philos[i].id = i + 1;
@@ -56,26 +55,25 @@ static int	initialize_philos(t_table *table)
 		table->philos[i].last_meal_time = table->start_time;
 		table->philos[i].eat_count = 0;
 		if (pthread_mutex_init(&table->philos[i].meal_mutex, NULL) != 0)
-			return (cleanup_philos(table, philos_initialized), 1);
-		philos_initialized++;
+			return (1);
+		(*philos_initialized)++;
 	}
 	return (0);
 }
 
 int	initialize_simulation(t_table *table)
 {
-	int	forks_initialized;
-
-	forks_initialized = 0;
+	table->forks_initialized = 0;
+	table->philos_initialized = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->philo_count);
-	if (!table->forks || init_forks(table, &forks_initialized) != 0)
-		return (cleanup(table, forks_initialized, 0, 1));
-	if (init_shared_mutexes(table, forks_initialized) != 0)
-		return (cleanup(table, forks_initialized, 0, 1));
+	if (!table->forks || init_forks(table, &table->forks_initialized) != 0)
+		return (cleanup(table, table->forks_initialized, 0, 1));
+	if (init_shared_mutexes(table, table->forks_initialized) != 0)
+		return (cleanup(table, table->forks_initialized, 0, 1));
 	table->start_time = get_current_time() + 100;
 	table->philos = malloc(sizeof(t_philo) * table->philo_count);
-	if (!table->philos || initialize_philos(table) != 0)
+	if (!table->philos || initialize_philos(table, &table->philos_initialized) != 0)
 		return (cleanup_shared_mutexes(table),
-			cleanup(table, forks_initialized, table->philo_count, 1));
+			cleanup(table, table->forks_initialized, table->philos_initialized, 1));
 	return (0);
 }
