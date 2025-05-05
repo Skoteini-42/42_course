@@ -28,13 +28,26 @@ static void	take_forks_odd(t_philo *philos)
 	print_status(philos, "has taken a fork");
 }
 
-void	take_forks(t_philo *philos)
+void take_forks(t_philo *philos)
 {
-	if (philos->id % 2 == 0)
-		take_forks_even(philos);
-	else
-		take_forks_odd(philos);
+    if (philos->id % 2 == 0)
+        take_forks_even(philos);
+    else
+        take_forks_odd(philos);
 }
+
+/*void take_forks(t_philo *philos)
+{
+    if (philos->id == philos->table->philo_count)
+        take_forks_odd(philos);
+    if (philos->id % 2 == 0)
+        take_forks_even(philos);
+    else
+        take_forks_odd(philos);
+    pthread_mutex_lock(&philos->meal_mutex);
+    philos->last_meal_time = get_current_time();
+    pthread_mutex_unlock(&philos->meal_mutex);
+}*/
 
 void	release_forks(t_philo *philos)
 {

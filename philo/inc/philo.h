@@ -42,8 +42,6 @@ typedef struct s_philo
 typedef struct s_table
 {
 	t_philo			*philos;
-	int				forks_initialized;
-	int				philos_initialized;
 	long			start_time;
 	int				termination_flag;
 	int				philo_count;
@@ -69,9 +67,9 @@ int		simulation_ended(t_table *table);
 
 /******** Simulation Utils ********/
 long	get_current_time(void);
+void    precise_usleep(long milliseconds, t_table *table);
 void	wait_for_simulation_start(t_table *table);
 void	print_status(t_philo *philos, char *msg);
-void	print_death(t_philo *philos);
 void	set_termination_flag(t_table *table);
 
 /******** Philosopher's actions ********/
@@ -82,7 +80,7 @@ void	philo_sleep(t_philo *philos);
 /******** Monitor Utils ********/
 int		check_philo_death(t_philo *philos);
 int		check_all_philos_full(t_table *table);
-void	handle_all_full(t_table *table);
+void	print_death(t_philo *philos);
 
 /******** Mutex management ********/
 void	take_forks(t_philo *philos);

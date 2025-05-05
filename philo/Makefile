@@ -18,7 +18,7 @@ H_DIR = inc
 H_FILES = philo.h
 HEADERS = $(addprefix $(H_DIR)/,$(H_FILES))
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread
 INCLUDES = -I$(H_DIR)
 
 all: $(NAME)
