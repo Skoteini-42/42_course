@@ -67,7 +67,7 @@ int		simulation_ended(t_table *table);
 
 /******** Simulation Utils ********/
 long	get_current_time(void);
-void    precise_usleep(long milliseconds, t_table *table);
+void	precise_usleep(long milliseconds, t_table *table);
 void	wait_for_simulation_start(t_table *table);
 void	print_status(t_philo *philos, char *msg);
 void	set_termination_flag(t_table *table);

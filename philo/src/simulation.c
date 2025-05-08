@@ -85,9 +85,9 @@ void    *monitor_routine(void *arg)
         }
         if (table->must_eat_count != -1 && check_all_philos_full(table))
         {
-			set_termination_flag(table);
+            set_termination_flag(table);
             pthread_mutex_lock(&table->print_mutex);
-            printf("%ld All philosophers have eaten %d times\n",
+            printf("%ld All philosophers have eaten %d times\n",   
                 get_current_time() - table->start_time, table->must_eat_count);
             pthread_mutex_unlock(&table->print_mutex);
             return (NULL);
