@@ -29,7 +29,7 @@ static void	execute_cd(char **argv, int i)
 	if (i != 2)
 		put_error("error: cd: bad arguments", NULL);
 	else if (chdir(argv[1]) == -1)
-		put_error("error: cd: cannot change directory to", argv[1]);
+		put_error("error: cd: cannot change directory to ", argv[1]);
 }
 
 static void	set_pipe_if(int has_pipe, int *fds, int end)
@@ -56,7 +56,7 @@ static void	execute_cmd(char **argv, int i, char **envp, int saved_stdin)
 		set_pipe_if(has_pipe, fds, STDOUT_FILENO);
 		argv[i] = NULL;
 		execve(argv[0], argv, envp);
-		put_error("error: cannot execute", argv[0]);
+		put_error("error: cannot execute ", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 	waitpid(pid, NULL, 0);
@@ -86,3 +86,4 @@ int	main(int argc, char **argv, char **envp)
 	close(saved_stdin);
 	return (EXIT_SUCCESS);
 }
+
