@@ -1,3 +1,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = https://github.com/edouardproust/42_minishell.git
+[submodule "cub3D"]
+	path = cub3D
+	url = https://github.com/edouardproust/42_cub3D.git
