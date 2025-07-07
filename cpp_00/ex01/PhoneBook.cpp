@@ -28,12 +28,20 @@ void	PhoneBook::searchContact() const
 		return ;
 	}
 	displayContactList();
-	std::ostringstream oss;
-	oss << contactCount;
-	std::string countStr = oss.str();
-	int index = getContactIndex("Enter contact index (1-" + countStr + "): ");
-	if (index >= 0)
-		contacts[index].printContact();
+	while (true)
+	{
+		std::ostringstream oss;
+		oss << contactCount;
+		std::string countStr = oss.str();
+		int index = getContactIndex("Enter contact index (1-" + countStr + "): ");
+		if (index >= 0)
+		{
+			contacts[index].printContact();
+			break ;
+		}
+		else
+			continue ;
+	}
 }
 
 void	PhoneBook::displayContactList() const
@@ -58,5 +66,5 @@ int PhoneBook::getContactIndex(const std::string &prompt) const
         return (index - 1);
     }
     std::cerr << "Invalid index.\n";
-    return (-1);
+	return (-1);
 }
