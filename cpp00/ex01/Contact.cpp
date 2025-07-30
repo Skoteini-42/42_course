@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <cstdlib>
 
 Contact::Contact() : index(-1) {}
 
@@ -45,12 +46,15 @@ std::string Contact::getInput(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt;
-		std::getline(std::cin, input);
-		if (std::cin.eof() || !input.empty())
-			break ;
+		if (!std::getline(std::cin, input))
+		{
+			std::cout << std::endl;
+			exit (0);
+		}
+		if (!input.empty())
+			return (input);
 		std::cerr << "Error: Field cannot be empty!\n";
 	}
-	return (input);
 }
 
 std::string	Contact::truncateField(const std::string& field)

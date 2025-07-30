@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <cstdlib>
 
 PhoneBook::PhoneBook() : contactCount(0) {}
 
@@ -62,11 +63,25 @@ int PhoneBook::getContactIndex(const std::string &prompt) const
 	std::string input;
 	int index;
 
-	std::cout << prompt;
-    std::getline(std::cin, input);
-    std::stringstream(input) >> index;
-    if (index >= 1 && index <= contactCount)
-        return (index - 1);
-    std::cerr << "Invalid index.\n";
-	return (-1);
+	while (true)
+	{
+		std::cout << prompt;
+    	if (!std::getline(std::cin, input))
+		{
+			std::cout << std::endl;
+			exit (0);
+		}
+		if (input.empty())
+		{
+			std::cerr << "Error: Input cannot be empty.\n";
+			continue ;
+		}
+    	std::stringstream(input) >> index;
+    	if (index < 1 || index > contactCount)
+		{
+			std::cerr << "Error: Invalid index.\n";
+			continue ;
+		}
+	return (index - 1);
+	}
 }
