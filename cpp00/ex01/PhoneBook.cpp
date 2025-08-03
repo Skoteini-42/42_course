@@ -57,7 +57,7 @@ void	PhoneBook::displayContactList() const
 	for (int i = 0; i < contactCount; i++)
 		contacts[i].printSearchLine();
 }
-//TODO : fix empty prompt + ctrl+D
+
 int PhoneBook::getContactIndex(const std::string &prompt) const
 {
 	std::string input;

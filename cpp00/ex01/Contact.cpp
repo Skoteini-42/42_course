@@ -39,7 +39,7 @@ void	Contact::printContact() const
 			<< "Phone number: " << phoneNumber << "\n"
 			<< "Darkest secret: " << darkestSecret << std::endl;
 }
-//TODO : fix ctrl + D on field
+
 std::string Contact::getInput(const std::string& prompt)
 {
 	std::string input;
