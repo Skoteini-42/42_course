@@ -17,8 +17,6 @@ int	main()
 			phonebook.addContact();
 		else if (input == "SEARCH")
 			phonebook.searchContact();
-	//	else
-	//		continue ;
 	}
 	return (0);
 }
