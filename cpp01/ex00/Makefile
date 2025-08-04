@@ -1,9 +1,9 @@
 NAME = zombie
-FLAGS = -Wall -Werror -Wextra -MMD -MP -std=c++98
+FLAGS = -Wall -Werror -Wextra -MMD -std=c++98
 SRCS = main.cpp \
-		Zombie.cpp \
+	Zombie.cpp \
         newZombie.cpp \
-        randomChump.cpp \
+        randomChump.cpp
 
 OBJS_DIR = obj
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.cpp=.o))

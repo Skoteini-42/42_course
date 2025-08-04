@@ -9,4 +9,12 @@ class Zombie
 
         std::string name;
 
+    public :
+
+        Zombie();
+
+        void announce();
+
 };
+
+#endif
