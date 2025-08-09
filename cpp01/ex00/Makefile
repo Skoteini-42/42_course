@@ -1,9 +1,9 @@
-NAME = zombie
+NAME = BraiiiiiiinnnzzzZ
 FLAGS = -Wall -Werror -Wextra -MMD -std=c++98
 SRCS = main.cpp \
 	Zombie.cpp \
-        newZombie.cpp \
-        randomChump.cpp
+    newZombie.cpp \
+    randomChump.cpp
 
 OBJS_DIR = obj
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.cpp=.o))
@@ -12,18 +12,18 @@ DEPS = $(OBJS:.o=.d)
 all : $(NAME)
 
 $(NAME): $(OBJS)
-        c++ -o $@ $^
+	c++ -o $@ $^
 
 $(OBJS_DIR)/%.o: %.cpp Makefile
-        @mkdir -p $(@D)
-        c++ $(FLAGS) -c $< -o $@
+	@mkdir -p $(@D)
+	c++ $(FLAGS) -c $< -o $@
 
 clean :
-        rm -rf $(OBJS_DIR)
-        rm -f $(DEPS)
+	rm -rf $(OBJS_DIR)
+	rm -f $(DEPS)
 
 fclean: clean
-        rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 

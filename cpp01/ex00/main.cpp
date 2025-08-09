@@ -1,7 +1,10 @@
-#include <iostream>
-#include <string>
+#include "Zombie.hpp"
 
 int main()
 {
-    Zombie zonbie;
+    Zombie* heapZombie = newZombie("ConeheadZombie");
+    heapZombie->announce();
+    delete heapZombie;
+    randomChump("NewspaperZombie");
+    return (0);
 }
