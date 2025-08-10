@@ -2,7 +2,7 @@
 # define HUMANB_HPP
 
 #include "Weapon.hpp"
-#include "string"
+#include <string>
 
 class HumanB
 {
