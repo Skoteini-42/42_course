@@ -1,7 +1,7 @@
-NAME = replace
+NAME = harl
 FLAGS = -Wall -Werror -Wextra -MMD -std=c++98
 SRCS = main.cpp \
-	FileReplace.cpp
+	Harl.cpp
 
 OBJS_DIR = obj
 OBJS = $(addprefix $(OBJS_DIR)/,$(SRCS:.cpp=.o))
