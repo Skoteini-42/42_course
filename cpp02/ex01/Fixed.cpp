@@ -25,11 +25,11 @@ Fixed::Fixed(const Fixed& objectToCopy)
 	*this = objectToCopy;
 }
 
-Fixed& Fixed::operator=(const Fixed& source)
+Fixed& Fixed::operator=(const Fixed& objectToAssignFrom)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &source)
-		this->_value = source.getRawBits();
+	if (this != &objectToAssignFrom)
+		this->_value = objectToAssignFrom.getRawBits();
 	return (*this);
 }
 
