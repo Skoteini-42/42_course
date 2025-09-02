@@ -18,6 +18,22 @@ bool FileReplace::replaceInFile(const std::string& filename,
 		std::cerr << "Error : could not open file" << std::endl;
 		return (false);
 	}
+	char testChar;
+    inputFile.get(testChar);
+    if (inputFile.fail() && !inputFile.eof())
+	{
+        std::cerr << "Error: " << filename << " appears to be a directory" << std::endl;
+        inputFile.close();
+        return false;
+    }
+	inputFile.close();
+	std::ifstream inputFile(filename.c_str());
+	if (!inputFile.is_open())
+	{
+		std::cerr << "Error: could not open file " << filename << std::endl;
+		return (false);
+	}
+	std::ifstream inputFile(filename.c_str());
 	std::string content;
 	std::string line;
 	while (std::getline(inputFile, line))
@@ -51,6 +67,6 @@ std::string	FileReplace::replaceOccurrences(const std::string& content,
 		result = result + s2;
 		prevPos = pos + s1.length();
 	}
-	result = result = result + content.substr(prevPos);
+	result = result + content.substr(prevPos);
 	return (result);
 }
