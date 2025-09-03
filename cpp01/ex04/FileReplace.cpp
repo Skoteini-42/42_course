@@ -12,28 +12,27 @@ bool FileReplace::replaceInFile(const std::string& filename,
 		std::cerr << "Error : s1 cannot be empty" << std::endl;
 		return (false);
 	}
-	std::ifstream inputFile(filename.c_str());
-	if (!inputFile.is_open())
+	std::ifstream testFile(filename.c_str());
+	if (!testFile.is_open())
 	{
 		std::cerr << "Error : could not open file" << std::endl;
 		return (false);
 	}
 	char testChar;
-    inputFile.get(testChar);
-    if (inputFile.fail() && !inputFile.eof())
+    testFile.get(testChar);
+    if (testFile.fail() && !testFile.eof())
 	{
         std::cerr << "Error: " << filename << " appears to be a directory" << std::endl;
-        inputFile.close();
+        testFile.close();
         return false;
     }
-	inputFile.close();
+	testFile.close();
 	std::ifstream inputFile(filename.c_str());
 	if (!inputFile.is_open())
 	{
 		std::cerr << "Error: could not open file " << filename << std::endl;
 		return (false);
 	}
-	std::ifstream inputFile(filename.c_str());
 	std::string content;
 	std::string line;
 	while (std::getline(inputFile, line))

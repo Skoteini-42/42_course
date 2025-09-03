@@ -5,7 +5,7 @@ int	main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Invalid number of argumnts." << std::endl;
+		std::cerr << "Invalid number of arguments." << std::endl;
 		return (-1);
 	}
 	FileReplace replacer;
