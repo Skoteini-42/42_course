@@ -61,53 +61,61 @@ float	Fixed::toFloat() const
 //Comparison operators
 bool Fixed::operator>(const Fixed &other) const
 {
-	return (this->toFloat() > other.toFloat());
+	return (this->_value > other._value);
 }
 
 bool Fixed::operator<(const Fixed &other) const
 {
-	return (this->toFloat() < other.toFloat());
+	return (this->_value < other._value);
 }
 
 bool Fixed::operator>=(const Fixed &other) const
 {
-	return (this->toFloat() >= other.toFloat());
+	return (this->_value >= other._value);
 }
 
 bool Fixed::operator<=(const Fixed &other) const
 {
-	return (this->toFloat() <= other.toFloat());
+	return (this->_value <= other._value);
 }
 
 bool Fixed::operator==(const Fixed &other) const
 {
-	return (this->toFloat() == other.toFloat());
+	return (this->_value == other._value);
 }
 
 bool Fixed::operator!=(const Fixed &other) const
 {
-	return (this->toFloat() != other.toFloat());
+	return (this->_value != other._value);
 }
 
 //Arithmetic operators
 Fixed Fixed::operator+(const Fixed &other) const
 {
-	return (Fixed(this->toFloat() + other.toFloat()));
+	Fixed result;
+	result._value = this->_value + other._value;
+	return (result);
 }
 
 Fixed Fixed::operator-(const Fixed &other) const
 {
-	return (Fixed(this->toFloat() - other.toFloat()));
+	Fixed result;
+	result._value = this->_value - other._value;
+	return (result);
 }
 
 Fixed Fixed::operator*(const Fixed &other) const
 {
-	return (Fixed(this->toFloat() * other.toFloat()));
+	Fixed result;
+	result._value = (this->_value * other._value) >> _fractionalBits;
+	return (result);
 }
 
 Fixed Fixed::operator/(const Fixed &other) const
 {
-	return (Fixed(this->toFloat() / other.toFloat()));
+	Fixed result;
+	result._value = (this->_value << _fractionalBits) / other._value;
+	return (result);
 }
 
 //Increment/Decrement
