@@ -10,26 +10,26 @@ Fixed::Fixed() : _value(0)
 Fixed::Fixed(const int integerValue)
 {
 	std::cout << "Int constructor called" << std::endl;
-	_value = integerValue  << _fractionalBits;
+	_value = integerValue << _fractionalBits;
 }
 
 Fixed::Fixed(const float floatingValue)
 {
 	std::cout << "Float constructor called" << std::endl;
-	_value  = roundf(floatingValue * (1 << _fractionalBits));
+	_value  =  roundf(floatingValue * (1 << _fractionalBits));
 }
 
-Fixed::Fixed(const Fixed& objectToCopy)
+Fixed::Fixed(const Fixed& other)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = objectToCopy;
+	*this = other;
 }
 
-Fixed& Fixed::operator=(const Fixed& objectToAssignFrom)
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &objectToAssignFrom)
-		this->_value = objectToAssignFrom.getRawBits();
+	if (this != &other)
+		this->_value = other.getRawBits();
 	return (*this);
 }
 

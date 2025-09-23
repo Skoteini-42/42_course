@@ -15,8 +15,8 @@ class Fixed
 	Fixed();
 	Fixed(const int integerValue);
 	Fixed(const float floatingValue);
-	Fixed(const Fixed& objectToCopy);
-	Fixed &operator=(const Fixed& objectToAssignFrom);
+	Fixed(const Fixed& other);
+	Fixed &operator=(const Fixed& other);
 	~Fixed();
 
 	int		getRawBits(void) const;
