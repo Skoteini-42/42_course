@@ -4,16 +4,21 @@
 int	main()
 {
 	std::cout << "=== ClapTrap Test ===\n" << std::endl;
-    //Default contructor
-	std::cout << "Creating default ClapTrap:" << std::endl;
+    //Contructors
 	ClapTrap defaultRobot;
 	std::cout << "Default name: " << defaultRobot.getName() << std::endl;
 	std::cout << "Default HP: " << defaultRobot.getHitPoints() << std::endl;
 	std::cout << "Default energy: " << defaultRobot.getEnergyPoints() << std::endl;
 	std::cout << "Default damage: " << defaultRobot.getAttackDamage() << std::endl;
+    ClapTrap anotherRobot("anotherRobot");
+    ClapTrap copyRobot = anotherRobot;
+    std::cout << "Copy name: " << copyRobot.getName() << std::endl;
+    ClapTrap assignedRobot;
+    assignedRobot = anotherRobot;
+    std::cout << "Assigned name: " << assignedRobot.getName() << std::endl;
 	std::cout << "\n---\n" << std::endl;
 
-	//Create ClapTraps - Contructors with parameters
+	//Contructors with parameters
     ClapTrap robot1("R2D2");
     ClapTrap robot2("C3PO");
     //Test attacks

@@ -13,14 +13,12 @@ ClapTrap::ClapTrap(std::string name)
 	std::cout << "ClapTrap " << _name << " constructed!" << std::endl;
 }
 
-ClapTrap::~ClapTrap()
-{
-	std::cout << "ClapTrap " << _name << " destroyed!" << std::endl;
-}
-
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
-	*this = other;
+	_name = other._name;
+	_hitPoints = other._hitPoints;
+	_energyPoints = other._energyPoints;
+	_attackDamage = other._attackDamage;
 	std::cout << "ClapTrap " << _name << " copied!" << std::endl;
 }
 
@@ -35,6 +33,11 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 	}
 	std::cout << "ClapTrap " << _name << " assigned!" << std::endl;
 	return (*this);
+}
+
+ClapTrap::~ClapTrap()
+{
+	std::cout << "ClapTrap " << _name << " destroyed!" << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)

@@ -5,7 +5,6 @@
 
 class ClapTrap
 {
-
 	private:
 
 	std::string	_name;
