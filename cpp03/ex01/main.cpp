@@ -4,9 +4,8 @@
 
 int main()
 {
-    std::cout << "=== CONSTRUCTION/DESTRUCTION CHAINING TEST ===\n" << std::endl;
-    
-    std::cout << "Creating ScavTrap:" << std::endl;
+    std::cout << "=== CONSTRUCTION TEST ===\n" << std::endl;
+
     ScavTrap scav("Guardian");
     
     std::cout << "\n=== ATTRIBUTES TEST ===\n" << std::endl;
@@ -18,7 +17,7 @@ int main()
     std::cout << "\n=== FUNCTIONALITY TEST ===\n" << std::endl;
     
     // Test overridden attack
-    scav.attack("intruder");
+    scav.attack("an intruder");
     std::cout << "Energy after attack: " << scav.getEnergyPoints() << std::endl;
     
     // Test inherited functions
@@ -38,12 +37,17 @@ int main()
     // Test copy constructor
     ScavTrap scavCopy(scav);
     std::cout << "Copy name: " << scavCopy.getName() << std::endl;
+    std::cout << "Copy HP: " << scavCopy.getHitPoints() << std::endl;
     
     // Test assignment operator
     ScavTrap scavAssigned("Temp");
-    std::cout << "Assigned name: " << scavAssigned.getName() << std::endl;
+    std::cout << "Before assignment - Name: " << scavAssigned.getName() << std::endl;
+    std::cout << "Before assignment - HP: " << scavAssigned.getHitPoints() << std::endl;
+    scavAssigned = scav;
+    std::cout << "After assignment - Name: " << scavAssigned.getName() << std::endl;
+    std::cout << "After assignment - HP: " << scavAssigned.getHitPoints() << std::endl;
     
-    std::cout << "\n=== DESTRUCTION CHAINING (AUTOMATIC) ===\n" << std::endl;
+    std::cout << "\n=== DESTRUCTION CHAINING ===\n" << std::endl;
     
     return 0;
 }
