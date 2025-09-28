@@ -9,7 +9,7 @@ int main()
 {
 	std::cout << "=== POLYMORPHISM TEST ===\n" << std::endl;
 
-	std::cout << "\n1. Valid test (heap):\n" << std::endl;
+	std::cout << "\n1. Heap test :\n" << std::endl;
 	
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
@@ -26,7 +26,7 @@ int main()
     delete j;
     delete meta;
 
-	std::cout << "\n2. Valid test (stack):\n" << std::endl;
+	std::cout << "\n2. Stack test :\n" << std::endl;
 	{
         Animal a;
         Cat c;
@@ -39,7 +39,7 @@ int main()
         d.makeSound();
 	}
 
-	std::cout << "\n3. Wrong test (heap):\n" << std::endl;
+	std::cout << "\n3. Wrong test :\n" << std::endl;
     const WrongAnimal*   meta2 = new WrongAnimal();
     const WrongAnimal*   k = new WrongCat();
     const WrongCat*      l = new WrongCat();
