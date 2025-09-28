@@ -7,7 +7,7 @@ WrongAnimal::WrongAnimal() : type("WrongAnimal")
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other)
 {
-	*this = other;
+	this->type = other.type;
 	std::cout << "WrongAnimal copy constructor called" << std::endl;
 }
 
