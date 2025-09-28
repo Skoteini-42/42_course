@@ -22,9 +22,9 @@ int main()
 	std::cout << meta->getType() << ": ";
 	meta->makeSound();
     
-    delete meta;
     delete i;
     delete j;
+    delete meta;
 
 	std::cout << "\n2. Valid test (stack):\n" << std::endl;
 	{
@@ -51,9 +51,9 @@ int main()
     std::cout << l->getType() << " (as WrongCat): ";
     l->makeSound();
 
-    delete meta2;
     delete k;
     delete l;
+    delete meta2;
 
 	std::cout << "\n=== END OF TEST ===\n" << std::endl;
 
