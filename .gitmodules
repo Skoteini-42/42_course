@@ -7,3 +7,6 @@
 [submodule "webserv"]
 	path = Webserv
 	url = https://github.com/edouardproust/webserv.git
+[submodule "Webserv"]
+	path = Webserv
+	url = https://github.com/edouardproust/webserv.git
