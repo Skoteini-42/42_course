@@ -4,6 +4,6 @@
 [submodule "cub3D"]
 	path = cub3D
 	url = https://github.com/edouardproust/42_cub3D.git
-[sunmodule "webserv"]
+[submodule "webserv"]
 	path = Webserv
 	url = https://github.com/edouardproust/webserv.git
