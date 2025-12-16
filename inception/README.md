@@ -28,7 +28,7 @@ Using docker containers, we deploy three interconnected services:
 - MariaDB as the persistent database backend
 
 ```
-┌──────────────────────────────────────────────┐
+┌──────────────────────────────────────────────┐ ```
 │             DOCKER CONTAINERS                │
 ├─────────────┬───────────────┬────────────────┤
 │   WEB LAYER │   APP LAYER   │   DATA LAYER   │
@@ -41,7 +41,7 @@ Using docker containers, we deploy three interconnected services:
         └─────────────┼──────────────┘
                       │
         Docker Network: inception (bridge)
-```
+```												 ```
 For this project, we are working with Dockers for the following reasons:
 
 - Our services (NGINX, WordPress, MariaDB) don't require complete OS isolation.
