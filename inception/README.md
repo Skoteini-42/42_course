@@ -1,6 +1,6 @@
 # Inception
 
-<!-- *This project has been created as part of the 42 curriculum by fpapadak.*
+*This project has been created as part of the 42 curriculum by fpapadak.*
 
 !## Table of Contents
 
@@ -41,7 +41,7 @@ Using docker containers, we deploy three interconnected services:
         └─────────────┼──────────────┘
                       │
         Docker Network: inception (bridge)
-```	
+```
 For this project, we are working with Dockers for the following reasons:
 
 - Our services (NGINX, WordPress, MariaDB) don't require complete OS isolation.
@@ -118,4 +118,4 @@ A section containing any relevant information about compilation, installation, a
 - https://github.com/sidpalas/devops-directive-docker-course
 
 A section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
-specifying for which tasks and which parts of the project.-->
+specifying for which tasks and which parts of the project.
