@@ -96,7 +96,7 @@ A Docker is not a Virtual machine. Unlike VMs, a Docker uses container images wh
 
 Virtual machines run their own copy of the Linux kernel (OS), while Docker containers are sharing the kernel with the host OS. Containers provide isolated filesystems, networks, and process spaces, but share the host kernel. In other words, they operate in the same OS.
 
-![alt text](image-1.png)
+<!-- ![alt text](image-1.png) -->
 
 ### Secrets vs Environment Variables
 ### Docker Network vs Host Network
