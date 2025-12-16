@@ -1,6 +1,6 @@
 # Inception
 
-This project has been created as part of the 42 curriculum by fpapadak.
+*This project has been created as part of the 42 curriculum by fpapadak.*
 
 ## Table of Contents
 
@@ -55,44 +55,38 @@ The project repository contains:
 
 - Dockerfiles (srcs/requirements/[service]/Dockerfile):
 
-	1. Custom NGINX image with TLS configuration
-	2. WordPress image with php-fpm optimization
-	3. MariaDB image with secure initialization
+1. Custom NGINX image with TLS configuration
+2. WordPress image with php-fpm optimization
+3. MariaDB image with secure initialization
 
 - Configuration Files:
 
-	1. NGINX site configuration with SSL/TLS settings
-	2. MariaDB initialization scripts
-	3. php-fpm configuration for WordPress
+1. NGINX site configuration with SSL/TLS settings
+2. MariaDB initialization scripts
+3. php-fpm configuration for WordPress
 
 - Orchestration Files:
 
-	1. docker-compose.yml: Defines services, networks, volumes
-	2. .env: Environment variables (credentials, domain names)
+1. docker-compose.yml: Defines services, networks, volumes
+2. .env: Environment variables (credentials, domain names)
 
 - Makefile: Automation for building and managing the stack
 
 - Security Files:
 
-	1. Secrets management using Docker secrets
-	2. SSL certificate generation scripts
-	3. Environment variable templates
+1. Secrets management using Docker secrets
+2. SSL certificate generation scripts
+3. Environment variable templates
 
 
 ### Main Design Choices
 
-- Each major component runs in its own container
-- Custom Docker Images: Built from Debian stable versions
-- Custom bridge network (inception) for inter-container communication:
-	- NGINX as the sole entry point (port 443 only). 
-	- Internal-only database access (no external exposure)
-- Named volumes for database and WordPress files
-- Bind mounts to host directories for easy backup
-- Proper permission handling between containers
-- TLSv1.2/1.3 only for all external traffic
-- Docker secrets for credential management
-- Environment variables for configuration
-- Non-root user execution where possible
+- **Container-per-Service**: Each component in its own container
+- **Custom Images**: Built from Debian stable versions
+- **Network Isolation**: Custom bridge network with NGINX as sole entry point
+- **Data Persistence**: Named volumes with bind mounts for backup
+- **Security**: TLSv1.2/1.3, Docker secrets, non-root execution
+- **Automation**: Makefile for one-command deployment
 
 ### Virtual Machines vs Docker
 
