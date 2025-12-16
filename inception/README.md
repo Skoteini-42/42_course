@@ -29,19 +29,19 @@ Using docker containers, we deploy three interconnected services:
 
 ```
 ┌──────────────────────────────────────────────┐ ```
-│             DOCKER CONTAINERS                │
-├─────────────┬───────────────┬────────────────┤
-│   WEB LAYER │   APP LAYER   │   DATA LAYER   │
-│   NGINX     │   WordPress   │   MariaDB      │
-│   (Reverse  │    (CMS)      │   (Database)   │
-│    Proxy &  │               │                │
-│    SSL)     │               │                │
-└───────┬─────┴───────┬───────┴──────┬─────────┘
-        │             │              │
-        └─────────────┼──────────────┘
-                      │
-        Docker Network: inception (bridge)
-```												 ```
+│             DOCKER CONTAINERS                │ ```
+├─────────────┬───────────────┬────────────────┤ ```
+│   WEB LAYER │   APP LAYER   │   DATA LAYER   │ ```
+│   NGINX     │   WordPress   │   MariaDB      │ ```
+│   (Reverse  │    (CMS)      │   (Database)   │ ```
+│    Proxy &  │               │                │ ```
+│    SSL)     │               │                │ ```
+└───────┬─────┴───────┬───────┴──────┬─────────┘ ```
+        │             │              │			 ```
+        └─────────────┼──────────────┘			 ```
+                      │							 ```
+        Docker Network: inception (bridge)		 ```
+```	
 For this project, we are working with Dockers for the following reasons:
 
 - Our services (NGINX, WordPress, MariaDB) don't require complete OS isolation.
