@@ -2,7 +2,7 @@
 
 *This project has been created as part of the 42 curriculum by fpapadak.*
 
-!## Table of Contents
+## Table of Contents
 
 - [Description](#description)
 - [Features](#features)
