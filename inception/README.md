@@ -2,7 +2,7 @@
 
 *This project has been created as part of the 42 curriculum by fpapadak.*
 
-## Table of Contents
+<!-- !## Table of Contents
 
 - [Description](#description)
 - [Features](#features)
@@ -118,4 +118,4 @@ A section containing any relevant information about compilation, installation, a
 - https://github.com/sidpalas/devops-directive-docker-course
 
 A section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
-specifying for which tasks and which parts of the project.
+specifying for which tasks and which parts of the project.-->
