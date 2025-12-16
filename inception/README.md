@@ -11,7 +11,7 @@
 
 ## Description
 
-<!-- ![alt text](image.png) -->
+![alt text](image.png)
 
 ### Brief Overview
 
@@ -27,6 +27,7 @@ Using docker containers, we deploy three interconnected services:
 - WordPress + php-fpm as the content management system
 - MariaDB as the persistent database backend
 
+```
 ┌──────────────────────────────────────────────┐
 │             DOCKER CONTAINERS                │
 ├─────────────┬───────────────┬────────────────┤
@@ -40,7 +41,7 @@ Using docker containers, we deploy three interconnected services:
         └─────────────┼──────────────┘
                       │
         Docker Network: inception (bridge)
-
+```
 For this project, we are working with Dockers for the following reasons:
 
 - Our services (NGINX, WordPress, MariaDB) don't require complete OS isolation.
@@ -96,7 +97,7 @@ A Docker is not a Virtual machine. Unlike VMs, a Docker uses container images wh
 
 Virtual machines run their own copy of the Linux kernel (OS), while Docker containers are sharing the kernel with the host OS. Containers provide isolated filesystems, networks, and process spaces, but share the host kernel. In other words, they operate in the same OS.
 
-<!-- ![alt text](image-1.png) -->
+![alt text](image-1.png)
 
 ### Secrets vs Environment Variables
 ### Docker Network vs Host Network
