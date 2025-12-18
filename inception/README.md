@@ -82,7 +82,7 @@ The project repository contains:
 ### Main Design Choices
 
 - **Container-per-Service**: Each component in its own container
-- **Custom Images**: Built from the latest Debian stable version: Debian Trixie 13
+- **Custom Images**: Built from the penultimate Debian stable version: Debian Bookworm 12
 - **Network Isolation**: Custom bridge network with NGINX as sole entry point
 - **Data Persistence**: Named volumes with bind mounts for backup
 - **Security**: TLSv1.2/1.3, Docker secrets, non-root execution
@@ -135,8 +135,10 @@ A section containing any relevant information about compilation, installation, a
 - https://github.com/sidpalas/devops-directive-docker-course
 - https://docs.docker.com/engine/install/debian/
 - https://docs.docker.com/engine/storage/volumes/
+- https://docs.docker.com/reference/dockerfile/
 - https://cloud.theodo.com/en/blog/docker-processes-container
 - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint
+- https://hub.docker.com/search?q=bookworm
 
 A section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
 specifying for which tasks and which parts of the project.
