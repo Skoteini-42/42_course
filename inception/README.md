@@ -107,7 +107,7 @@ To summarize about the benefits of using docker containers:
 ### Docker Network vs Host Network
 ### Docker Volumes vs Bind Mounts
 
-Our applications will often generate data (eg MariaDB data), which we will want to keep in case the respective container is destroyed and recreated from scratch. For that purpose, Docker and containers can handle this case via ```volumes``` and ```mounts```. Volumes and mounts allow us to store a location where specific data can exist beyond the lifecycle of a single container. The data can live in a location managed by the Docker called Docker Volume, or a location in our host filesystem called Bind Mount. Bind Mounts are dependent on the directory structure and the OS of the host machine, while Docker Volumes are completely managed by the Docker.
+Our applications will often generate data (eg MariaDB data), which we will want to keep in case the respective container is destroyed and recreated from scratch. For that purpose, Docker and containers can handle this case via ```volumes``` and ```mounts```. Volumes and mounts allow us to designate a location where specific data can exist beyond the lifecycle of a single container. The data can live in a location managed by the Docker called Docker Volume, or a location in our host filesystem called Bind Mount. Bind Mounts are dependent on the directory structure and the OS of the host machine, while Docker Volumes are completely managed by the Docker. Such volumes on Liunx live inside var/lib/Docker/volumes path.
 
 ![alt text](images/image-2.png)
 
@@ -116,7 +116,7 @@ For this reason, best practice for utilizing either, would be :
 - Back up or migrate -> Docker Volumes
 - Management of the location where data is stored -> Docker Volumes (via Docker CLI commands)
 - OS constraints -> Docker Volumes (work in Linux AND Windows)
-- Performance I/O -> Docker Volume
+- Performance I/O -> Docker Volumes
 - Accessing files or directories from the host -> Bind Mount
 - Creating or generating files in a container that should persist inside the host -> Bind Mount
 - Sharing config files from the host to containers -> Bind Mount
@@ -135,6 +135,8 @@ A section containing any relevant information about compilation, installation, a
 - https://github.com/sidpalas/devops-directive-docker-course
 - https://docs.docker.com/engine/install/debian/
 - https://docs.docker.com/engine/storage/volumes/
+- https://cloud.theodo.com/en/blog/docker-processes-container
+- https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint
 
 A section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
 specifying for which tasks and which parts of the project.
