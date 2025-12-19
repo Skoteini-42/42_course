@@ -107,7 +107,7 @@ To summarize about the benefits of using docker containers:
 ### Docker Network vs Host Network
 ### Docker Volumes vs Bind Mounts
 
-Our applications will often generate data (eg MariaDB data), which we will want to keep in case the respective container is destroyed and recreated from scratch. For that purpose, Docker and containers can handle this case via ```volumes``` and ```mounts```. Volumes and mounts allow us to designate a location where specific data can exist beyond the lifecycle of a single container. The data can live in a location managed by the Docker called Docker Volume, or a location in our host filesystem called Bind Mount. Bind Mounts are dependent on the directory structure and the OS of the host machine, while Docker Volumes are completely managed by the Docker. Such volumes on Liunx live inside var/lib/Docker/volumes path.
+Our applications will often generate data (eg MariaDB data), which we will want to keep in case the respective container is destroyed and recreated from scratch. For that purpose, Docker and containers can handle this case via ```volumes``` and ```mounts```. Volumes and mounts allow us to designate a location where specific data can exist beyond the lifecycle of a single container. The data can live in a location managed by the Docker called Docker Volume, or a location in our host filesystem called Bind Mount. Bind Mounts are dependent on the directory structure and the OS of the host machine, while Docker Volumes are completely managed by the Docker.
 
 ![alt text](images/image-2.png)
 
