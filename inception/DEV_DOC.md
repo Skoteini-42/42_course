@@ -9,12 +9,12 @@ This file serves as a guide on how a developer can:
 
 ## Table of contents
 
-- [Setting up the enviroment from scratch](#setting-up-the-enviroment-from-scratch)
+- [Setting up the environment from scratch](#setting-up-the-enviroment-from-scratch)
 - [Building and launching the project](#building-and-launching-the-project)
 - [Containers and volumes management](#containers-and-volumes-management)
 - [Project data information](#project-data-information)
 
-## Setting up the enviroment from scratch
+## Setting up the environment from scratch
 
 (VM included?)
 

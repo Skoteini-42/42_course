@@ -5,9 +5,8 @@
 ## Table of Contents
 
 - [Description](#description)
-- [Features](#features)
 - [Instructions](#instructions)
-- [Resources](#resources)
+- [Resources](#-resources)
 
 ## Description
 
@@ -68,10 +67,9 @@ The project repository contains:
 
 - Orchestration Files:
 
-1. docker-compose.yml: Defines services, networks, volumes
-2. .env: Environment variables (credentials, domain names)
-
-- Makefile: Automation for building and managing the stack
+1. ```docker-compose.yml```: Defines services, networks, volumes
+2. ```.env```: Environment variables (credentials, domain names)
+3. ```Makefile```: Automation for building and managing the stack
 
 - Security Files:
 
@@ -121,16 +119,33 @@ For this reason, best practice for utilizing either, would be :
 - Creating or generating files in a container that should persist inside the host -> Bind Mount
 - Sharing config files from the host to containers -> Bind Mount
 
-## Features
-
-Feature list
-
 
 ## Instructions
 
-A section containing any relevant information about compilation, installation, and/or execution
+### Prerequisites
 
-## Resources
+- Docker Engine 20.10+
+- Docker Compose 2.0+
+- Virtual Machine (Debian recommended)
+- Git
+
+### Quick Start
+
+1. **Clone and open the repository:**
+```
+git@vogsphere.42barcelona.com:vogsphere/intra-uuid-efa3b50e-e48e-4d63-95b5-466fe15f79f6-7131861-fpapadak
+cd inception
+```
+
+2. **Set up environment:**
+TODO:  Insert the secrets folder inside the root of the repository
+
+3. **Build and run:**
+```
+make
+```
+
+## 📚 Resources
 
 - https://github.com/sidpalas/devops-directive-docker-course
 - https://docs.docker.com/engine/install/debian/
