@@ -50,8 +50,8 @@ sudo apt install -y git make
 We chose for our VM to run Debian OS therefore, the Docker setup instructions were followed from the [Docker's official site](https://docs.docker.com/engine/install/debian).
 
 Notes:
-- Choose the *Install using the apt repository* option and set up Docker's apt repository as instructed in the first part.
-- For the second part in order to install the Docker packages, choose the *specific version*.
+- Follow the *Install using the apt repository* part and set up Docker's apt repository as instructed in the first part.
+- For the second part in order to install the Docker packages, follow the *specific version* tab.
 
 ```
 # Verify that Docker is running
