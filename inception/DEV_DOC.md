@@ -16,7 +16,20 @@ This file serves as a guide on how a developer can:
 
 ## Setting up the environment from scratch
 
-(VM included?)
+### Virtual Machine set up
+
+The project is required to be executed inside a Virtual Machine.
+
+The specs used for development are the following:
+
+- Virtual Machine: Oracle VM Virtual Box
+- Operating System: Debian 12 (Bookworm)
+- Desktop environment: XFCE (lightweight GUI for minimal resource usage)
+- Architecture: amd64
+- Networking: NAT (default VirtualBox networking mode)
+- Utilities: Standard system utilities including SSL/TLS support
+- RAM: Minimum 2GB
+- Disk Space: 20GB
 
 ### Prerequisites:
 
@@ -67,3 +80,24 @@ sudo docker run hello-world
 For for the sake of conveniency, add ```user``` to the ```docker``` group:
 ```sudo usermod -aG docker $USER```
 
+
+
+## Building and launching the project
+
+```
+# Builds the container image for the relevant application
+# -t to allow your image to have a tag (eg version)
+docker build -t mariadb:0 .
+# Lists all the Docker images available on your local machine
+docker iamges
+# Runs the container mariadb from the container image mariadb:0
+# -d to run the container in detached mode (in the background)
+docker run -d --name mariadb mariadb:0
+# To check logs
+docker logs mariadb
+# Shows all the containers that are currently running.
+# -a to show all the containers (included the ones that have stopped)
+docker ps
+# Connect
+docker exec -it mariadb mariadb
+```
