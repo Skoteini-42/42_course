@@ -4,7 +4,7 @@ FROM debian:bookworm-slim
 
 # Install dependencies
 # Clean up package lists in order to maintain disk space small
-RUN apt update && apt install -Y \
+RUN apt update && apt install -y \
 	mariadb-server \
 	mariadb-client \
 	&& rm -rf /var/lib/apt/lists/*

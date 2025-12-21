@@ -7,7 +7,7 @@ WORKDIR /srcs/requirements/nginx/
 
 # Install dependencies: openssl is needed for TSL certificates
 # Clean up package lists in order to maintain disk space small
-RUN apt update && apt install -Y \
+RUN apt update && apt install -y \
 	nginx \
 	openssl \
 	&& rm -rf /var/lib/apt/lists/*
