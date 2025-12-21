@@ -27,11 +27,27 @@ The specs used for development are the following:
 - Desktop environment: XFCE (lightweight GUI for minimal resource usage)
 - Architecture: amd64
 - Networking: NAT (default VirtualBox networking mode)
-- Utilities: Standard system utilities including SSL/TLS support
+- Utilities: Standard system utilities and SSL support
 - RAM: Minimum 2GB
 - Disk Space: 20GB
 
-### Prerequisites:
+### Local domain name configuration
+
+In order to access the WordPress website using the required custom domain `<yourlogin>.42.fr`, local DNS resolution must be configured. Since the project is developed and tested entirely inside a Debian VM with a graphical interface, the domain name is resolved locally within the VM. The NGINX container will expose port 443 on all VM interfaces (0.0.0.0:443).
+
+The `/etc/hosts` file inside the VM needs to be edited to map the custom domain to the loopback address:
+```
+sudo nano /etc/hosts
+
+# Add the following entry inside the file, save and exit
+127.0.0.1   <yourlogin>.42.fr
+
+# Confirm that the local DNS resolution is working
+ping yourlogin.42.fr
+```
+This ensures that requests to `https://yourlogin.42.fr` are correctly routed to the NGINX container listening on port 443.
+
+### System prerequisites
 
 First and foremost, make sure that you add user to sudo group, as Docker commands usually require root privileges :
 
@@ -48,14 +64,14 @@ usermod -aG sudo <your_username>
 # Exit and logout from the desktop for the changes to take effect
 exit
 
-$ Login back and verify the changes
+# Login back and verify the changes
 whoami
 ```
 
 Furthermore, make sure you have installed additional dependencies that are going to be used:
 
 ```
-sudo apt install -y git make
+sudo apt install -y git make vim
 ```
 
 ### Installing Docker :
@@ -101,3 +117,7 @@ docker ps
 # Connect
 docker exec -it mariadb mariadb
 ```
+
+## Containers and volumes management
+
+## Project data information

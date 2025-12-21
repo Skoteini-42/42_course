@@ -155,5 +155,4 @@ make
 - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint
 - https://hub.docker.com/search?q=bookworm
 
-A section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used —
-specifying for which tasks and which parts of the project.
+AI was used in order to validate the documentations' correctness.
