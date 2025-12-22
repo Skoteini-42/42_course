@@ -100,23 +100,9 @@ For for the sake of conveniency, add ```user``` to the ```docker``` group:
 
 ## Building and launching the project
 
-```
-# Builds the container image for the relevant application
-# -t to allow your image to have a tag (eg version)
-docker build -t mariadb:0 .
-# Lists all the Docker images available on your local machine
-docker iamges
-# Runs the container mariadb from the container image mariadb:0
-# -d to run the container in detached mode (in the background)
-docker run -d --name mariadb mariadb:0
-# To check logs
-docker logs mariadb
-# Shows all the containers that are currently running.
-# -a to show all the containers (included the ones that have stopped)
-docker ps
-# Connect
-docker exec -it mariadb mariadb
-```
+One way to build the containers one by one, is by specifying run commands (`docker run`) inside the Makefile for each container along with its relevant arguments, which when ran, everything will be build individually.
+For this project's needs though, there is a much better and cleaner way to do that in case we are developing a containerized application with more than one service, and that is by making use of the `docker-compose.yml` file.
+
 
 ## Containers and volumes management
 
