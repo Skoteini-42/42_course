@@ -6,21 +6,21 @@ services:
       context: # we can specify to automatically use Dockerfile ${MARIADB_CONTEXT} from env
       dockerfile:
     init: true # needed?
-    restart: # always or until stop?
+    restart: unless stopped
     environment: # if we have vars inside the container used by the script
-    volumes: # more verbose preferred with the below types 
-      type:
+    volumes: # more verbose preferred with the below options for diff volumes
+    - type:
       source:
       target:
     network:
-    ports: # needed, or already handled inside Dockerfile?
+    ports: # needed only for wp and nginx
     secrets: # relevant passowords
 
 # at the end, can we have custom networks like this, for better control for which
 # services can talk to which?
 # networks:
-#   -frontend: -> for services that don't require to be connected to the db?
-#   -backend: -> where the rest of the servives are connected to the db?
+#   -frontend: -> for services that don't require to be connected to the db? nginx + wordpress
+#   -backend: -> where the rest of the servives are connected to the db? mariadb + wordpress
 
 # depends on: -> for wordpress and nginx
 # that tells dockercompose to wait for another container to start before starting this service

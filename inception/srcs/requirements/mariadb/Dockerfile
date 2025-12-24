@@ -1,26 +1,31 @@
 # Draft - Basic commands
 # Base image to build from; using the penultimate stable version of Debian, Bookworm 12
-FROM debian:bookworm-slim
+FROM		debian:bookworm-slim
 
 # Information added in the image's metadata
-LABEL owner="fpapadak"
+LABEL		owner="fpapadak"
 
 # Install dependencies
 # Clean up package lists in order to maintain disk space as small as possible
-RUN apt update && apt install -y \
-	mariadb-server \
-	mariadb-client \
-	&& rm -rf /var/lib/apt/lists/*
+RUN			apt update && apt install -y \
+			mariadb-server \
+			mariadb-client \
+			&& rm -rf /var/lib/apt/lists/*
 
-# COPY ?
-# COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
+# Copy MariaDB configuration (networking, bind-address, etc)
+#COPY		./conf/50-server.conf /etc/mysql/mariadb.conf.d/50-server.conf
+# RUN			chmod 644 /etc/mysql/mariadb.conf.d/50-server.conf
+
+# Copy initialization script and make it executable
+#COPY		./tools/init_db.sh /usr/local/bin/init_db.sh
+#RUN			chmod +x /usr/local/bin/init_db.sh
 
 # Port to run from
-EXPOSE 3306
+#EXPOSE		3306
 
-# User to override root, as MariaDB explicitly operates from a non-root user
-USER mysqld
+# Run the initialization script which wil initialize the database, create users ands set passwords
+#ENTRYPOINT	["/usr/local/bin/init_db.sh"]
 
 # mysqld is the MariaDB server daemon - in Debian it won't demonize when run directly
 # It stays in the foreground so mysqld becomes PID 1
-CMD ["mysqld"]
+#CMD 		["mysqld_safe"]
