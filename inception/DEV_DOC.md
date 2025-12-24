@@ -74,7 +74,7 @@ Furthermore, make sure you have installed additional dependencies that are going
 sudo apt install -y git make vim
 ```
 
-### Installing Docker :
+### Installing Docker
 
 We chose for our VM to run Debian OS therefore, the Docker setup instructions were followed from the [Docker's official site](https://docs.docker.com/engine/install/debian).
 
@@ -96,6 +96,13 @@ sudo docker run hello-world
 For for the sake of conveniency, add ```user``` to the ```docker``` group:
 ```sudo usermod -aG docker $USER```
 
+### MariaDB configuration file
+
+MariaDB's config files are located inside `/etc/mysql/mariadb.conf.d`.
+By default, it contains a few config files like `50-server.cnf` and it loads them in alphabetical order.
+For the purpose of this project, we only need to override the `bind-address` parameter, as it points to the localhost's address `127.0.0.1` and set it to `0.0.0.0`.
+This way, we allow MaraDB to listen to all network interfaces inside the container, therefore other containers like Wordpress, will be able to connect to the database which is after all, the purpose of this project.
+In order to preserve the default settings, we will create a different config file called `60-network.cnf` inside `src/requirements/conf` which will contain the desired `bind-address` and will be copied accordingly inside the default config files location.
 
 
 ## Building and launching the project

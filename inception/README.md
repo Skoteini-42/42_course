@@ -155,4 +155,4 @@ make
 - https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint
 - https://hub.docker.com/search?q=bookworm
 
-AI was used in order to validate the documentations' correctness.
+AI was used for troubleshooting purposes.

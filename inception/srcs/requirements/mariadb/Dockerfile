@@ -12,7 +12,7 @@ RUN			apt update && apt install -y \
 			mariadb-client \
 			&& rm -rf /var/lib/apt/lists/*
 
-# Copy MariaDB configuration (networking, bind-address, etc)
+# Copy MariaDB configuration (bind-address)
 COPY		./conf/60-network.cnf /etc/mysql/mariadb.conf.d/60-network.cnf
 # RUN			chmod 644 /etc/mysql/mariadb.conf.d/60-network.cnf
 
