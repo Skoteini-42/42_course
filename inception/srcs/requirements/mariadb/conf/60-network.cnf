@@ -1,0 +1,8 @@
+# This config file is used to override MariaDB's network defaults
+# Based on its name, it will be loaded after 50-server.config
+# Inside 50-server.config bind-address as default points to 127.0.0.1 (localhost)
+# We will set it to 0.0.0.0 to make it listen to all available networks
+# inside the container. This allows other containers,
+# like the WordPress service, to connect to the database.
+[mysqld]
+bind-address = 0.0.0.0
