@@ -33,7 +33,7 @@ The specs used for development are the following:
 
 ### Local domain name configuration
 
-In order to access the WordPress website using the required custom domain `<yourlogin>.42.fr`, local DNS resolution must be configured. Since the project is developed and tested entirely inside a Debian VM with a graphical interface, the domain name is resolved locally within the VM. The NGINX container will expose port 443 on all VM interfaces (0.0.0.0:443).
+In order to access the WordPress website using the required custom domain `<yourlogin>.42.fr`*, local DNS resolution must be configured. Since the project is developed and tested entirely inside a Debian VM with a graphical interface, the domain name is resolved locally within the VM. The NGINX container will expose port 443 on all VM interfaces (0.0.0.0:443).
 
 The `/etc/hosts` file inside the VM needs to be edited to map the custom domain to the loopback address:
 ```
@@ -100,9 +100,9 @@ For for the sake of conveniency, add ```user``` to the ```docker``` group:
 
 MariaDB's config files are located inside `/etc/mysql/mariadb.conf.d`.
 By default, it contains a few config files like `50-server.cnf` and it loads them in alphabetical order.
-For the purpose of this project, we only need to override the `bind-address` parameter, as it points to the localhost's address `127.0.0.1` and set it to `0.0.0.0`.
+For the purpose of this project, we only need to override the `bind-address` parameter, as it currently points to the localhost's address `127.0.0.1`, and set it to `0.0.0.0`.
 This way, we allow MaraDB to listen to all network interfaces inside the container, therefore other containers like Wordpress, will be able to connect to the database which is after all, the purpose of this project.
-In order to preserve the default settings, we will create a different config file called `60-network.cnf` inside `src/requirements/conf` which will contain the desired `bind-address` and will be copied accordingly inside the default config files location.
+In order to preserve the rest of the default settings, we will create a different config file called `60-network.cnf` inside `src/requirements/conf` which will contain the desired `bind-address` and will be copied accordingly inside the default config files location.
 
 
 ## Building and launching the project
@@ -114,3 +114,11 @@ For this project's needs though, there is a much better and cleaner way to do th
 ## Containers and volumes management
 
 ## Project data information
+
+All persistent data is stored on the host machine using bind mounts.
+
+- MariaDB data: /home/yourlogin/data/mariadb -> /var/lib/mysql
+
+
+* Note that wherever "yourlogin" is specified, the login of the student must be inserted instead.
+In this project, "fpapadak" was used, as the owner.

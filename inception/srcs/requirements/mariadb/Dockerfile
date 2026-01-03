@@ -1,4 +1,3 @@
-# Draft - Basic commands
 # Base image to build from; using the penultimate stable version of Debian, Bookworm 12
 FROM		debian:bookworm-slim
 
@@ -14,7 +13,7 @@ RUN			apt update && apt install -y \
 
 # Copy MariaDB configuration (bind-address)
 COPY		./conf/60-network.cnf /etc/mysql/mariadb.conf.d/60-network.cnf
-# RUN			chmod 644 /etc/mysql/mariadb.conf.d/60-network.cnf
+RUN			chmod 644 /etc/mysql/mariadb.conf.d/60-network.cnf
 
 # Copy initialization script and make it executable
 COPY		./tools/init_db.sh /usr/local/bin/init_db.sh
@@ -23,7 +22,7 @@ RUN			chmod +x /usr/local/bin/init_db.sh
 # Port to run from
 EXPOSE		3306
 
-# Run the initialization script which wil initialize the database, create users ands set passwords
+# Runs the initialization script which wil initialize the database, creates users and sets passwords
 ENTRYPOINT	["/usr/local/bin/init_db.sh"]
 
 # mysqld is the MariaDB server daemon - in Debian it won't demonize when run directly

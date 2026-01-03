@@ -123,7 +123,7 @@ For this reason, best practice for utilizing either, would be :
 ## Instructions
 
 ### Prerequisites
-
+TODO: Commands with packages to install
 - Docker Engine 20.10+
 - Docker Compose 2.0+
 - Virtual Machine (Debian recommended)
@@ -133,7 +133,7 @@ For this reason, best practice for utilizing either, would be :
 
 1. **Clone and open the repository:**
 ```
-git@vogsphere.42barcelona.com:vogsphere/intra-uuid-efa3b50e-e48e-4d63-95b5-466fe15f79f6-7131861-fpapadak
+git clone git@vogsphere.42barcelona.com:vogsphere/intra-uuid-efa3b50e-e48e-4d63-95b5-466fe15f79f6-7131861-fpapadak inception
 cd inception
 ```
 
