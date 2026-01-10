@@ -1,10 +1,9 @@
-version: "5.0.1"
+version: "3.8"
 services:
-  mariadb:
-    image: mariadb:default # set a tag to prevent it from choosing latest
-    build:
-      context: # we can specify to automatically use Dockerfile ${MARIADB_CONTEXT} from env
-      dockerfile:
+	mariadb:
+    container_name: mariadb
+    image: mariadb:inception
+    build: ./requirements/mariadb
     init: true # needed?
     restart: unless stopped
     environment: # if we have vars inside the container used by the script
@@ -13,8 +12,54 @@ services:
       source:
       target:
     network:
-    ports: # needed only for wp and nginx
-    secrets: # relevant passowords
+    secrets:
+      - mysql_root_password
+      - mysql_password
+
+
+#  wordpress:
+#    build: ./requirements/wordpress
+#    container_name: wordpress
+#    restart: unless-stopped
+#    env_file:
+#      - .env
+#    secrets:
+#      - mysql_password
+#    depends_on:
+#      - mariadb
+#    networks:
+#      - frontend
+#      - backend
+#    ports:
+
+#  nginx:
+#    build: ./requirements/nginx
+#    container_name: nginx
+#    restart: unless-stopped
+#    ports:
+#      - "443:443"
+#    depends_on:
+#      - wordpress
+#    volumes:
+#     - type: bind
+#        source: ./requirements/nginx/conf
+#        target: /etc/nginx/conf.d
+#    networks:
+#      - frontend
+#    ports:
+
+secrets:
+  mysql_root_password:
+    file: ./secrets/db_root_password.txt
+  mysql_password:
+    file: ./secrets/db_password.txt
+
+volumes:
+  mariadb_data:
+
+networks:
+  frontend:
+  backend:
 
 # at the end, can we have custom networks like this, for better control for which
 # services can talk to which?
@@ -23,4 +68,5 @@ services:
 #   -backend: -> where the rest of the servives are connected to the db? mariadb + wordpress
 
 # depends on: -> for wordpress and nginx
+# ports -> needed only for nginx and WP
 # that tells dockercompose to wait for another container to start before starting this service

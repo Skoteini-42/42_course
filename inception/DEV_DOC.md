@@ -120,5 +120,5 @@ All persistent data is stored on the host machine using bind mounts.
 - MariaDB data: /home/yourlogin/data/mariadb -> /var/lib/mysql
 
 
-* Note that wherever "yourlogin" is specified, the login of the student must be inserted instead.
+*Note that wherever "yourlogin" is specified, the login of the student must be inserted instead.
 In this project, "fpapadak" was used, as the owner.
