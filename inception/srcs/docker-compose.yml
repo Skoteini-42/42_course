@@ -4,68 +4,85 @@ services:
     container_name: mariadb
     image: mariadb:inception
     build: ./requirements/mariadb
-    init: true # needed?
     restart: unless stopped
-    environment: # if we have vars inside the container used by the script
-    volumes: # more verbose preferred with the below options for diff volumes
-    - type:
-      source:
-      target:
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE} # From .env
+      MYSQL_USER: ${MYSQL_USER}  # From .env
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - type: bind
+        source: ./data/mariadb
+        target: /var/lib/mysql
     network:
+      - backend
     secrets:
       - mysql_root_password
       - mysql_password
 
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    restart: unless-stopped
+    environment:
+      WP_DB_HOST: mariadb:3306
+      WP_DB_NAME: ${MYSQL_DATABASE}
+      WP_DB_USER: ${MYSQL_USER}
+      WP_DB_PASSWORD_FILE: /run/secrets/db_password
+      WP_TITLE: "Inception Project"
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: ./data/wordpress
+        target: /var/www/html
+    depends_on:
+      - mariadb
+    networks:
+      - frontend
+      - backend
+    secrets:
+      - mysql_password
 
-#  wordpress:
-#    build: ./requirements/wordpress
-#    container_name: wordpress
-#    restart: unless-stopped
-#    env_file:
-#      - .env
-#    secrets:
-#      - mysql_password
-#    depends_on:
-#      - mariadb
-#    networks:
-#      - frontend
-#      - backend
-#    ports:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    restart: unless-stopped
+    envirnoment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - frontend
+    ports:
+      - "443:443"
 
-#  nginx:
-#    build: ./requirements/nginx
-#    container_name: nginx
-#    restart: unless-stopped
-#    ports:
-#      - "443:443"
-#    depends_on:
-#      - wordpress
-#    volumes:
-#     - type: bind
-#        source: ./requirements/nginx/conf
-#        target: /etc/nginx/conf.d
-#    networks:
-#      - frontend
-#    ports:
-
+# Secret definitions
 secrets:
   mysql_root_password:
     file: ./secrets/db_root_password.txt
   mysql_password:
     file: ./secrets/db_password.txt
 
+# Volume definitions
 volumes:
   mariadb_data:
+    driver_opts:
+      type: none
+      device: ./data/mariadb
+      o: bind
+  wordpress_data:
+    driver_opts:
+      type: none
+      device: ./data/wordpress
+      o: bind
 
+# Network definitions
 networks:
-  frontend:
-  backend:
-
-# at the end, can we have custom networks like this, for better control for which
-# services can talk to which?
-# networks:
-#   -frontend: -> for services that don't require to be connected to the db? nginx + wordpress
-#   -backend: -> where the rest of the servives are connected to the db? mariadb + wordpress
+  frontend: # public facing
+  backend: # internal communication
 
 # depends on: -> for wordpress and nginx
 # ports -> needed only for nginx and WP
