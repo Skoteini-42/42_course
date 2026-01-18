@@ -36,6 +36,7 @@ services:
       - type: bind
         source: ./data/wordpress
         target: /var/www/html
+    # This tells dockercompose to wait for another container to start before starting this service
     depends_on:
       - mariadb
     networks:
@@ -66,24 +67,7 @@ secrets:
   mysql_password:
     file: ./secrets/db_password.txt
 
-# Volume definitions
-volumes:
-  mariadb_data:
-    driver_opts:
-      type: none
-      device: ./data/mariadb
-      o: bind
-  wordpress_data:
-    driver_opts:
-      type: none
-      device: ./data/wordpress
-      o: bind
-
 # Network definitions
 networks:
   frontend: # public facing
   backend: # internal communication
-
-# depends on: -> for wordpress and nginx
-# ports -> needed only for nginx and WP
-# that tells dockercompose to wait for another container to start before starting this service
